@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home </title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="Img/logo.png" type="image/png">
+  
+  <style>
+    .hero {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .picture-area {
+      text-align: center;
+      margin-top: 50px;
+    }
+    .picture-area img {
+      width: 200px; 
+      height: auto;
+      margin: 20px;
+    }
+    .order-now-btn {
+      background-color: #ff99cee2; 
+      color: #fff; 
+      padding: 10px 20px; 
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 1.2rem;
+      transition: background-color 0.3s ease;
+    }
+    .order-now-btn:hover {
+      background-color: #ffcc49; 
+    }
+    .active a {
+      color: #ffcc49; 
+      font-weight: bold;
+    }
+    .map-container {
+      text-align: center;
+      margin: 50px 0;
+    }
+    .map-container iframe {
+      width: 100%;
+      max-width: 600px;
+      height: 450px;
+      border: 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <img src="Img/a (1).png" alt="Sweet Life Logo" class="logo">
+      <h1>Sweet Life</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="order.html">Order now</a></li>
+          <li><a href="registration.html">Register</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h2>Welcome to Sweet Life</h2>
+      <p>Indulge in our delicious flavors that will make your taste buds dance!</p>
+      <div class="center">
+        <a href="order.html" class="order-now-btn">Buy Now</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="picture-area">
+    <h2>Our Delicious Collection</h2>
+    <div class="container">
+      <img src="Img/IMG_5246.jpg" alt="Flavor 1">
+      <img src="Img/IMG_5250.jpg" alt="Flavor 2">
+      <img src="Img/IMG_5251.jpg" alt="Flavor 3">
+    </div>
+  </section>
+
+  <section class="map-container">
+    <h2>Location of our Store</h2>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3150.1058834331155!2d145.0399051157064!3d-37.818693479754314!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642f5c74c2083%3A0x6f3f4d92d67bdbee!2sJohn%20St%2C%20Hawthorn%20VIC%203122%2C%20Australia!5e0!3m2!1sen!2sus!4v1621606324571!5m2!1sen!2sus" allowfullscreen="" loading="lazy"></iframe>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div style="text-align: center;">
+        <img src="Img/a (1).png" alt="Sweet Life Logo" class="logo">
+      </div>
+      <p>&copy; 2024 Sweet Life. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const currentLocation = window.location.href;
+      const menuItems = document.querySelectorAll('nav ul li a');
+
+      menuItems.forEach(item => {
+        if (item.href === currentLocation) {
+          item.parentElement.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

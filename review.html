@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Order</title>
+    <link rel="icon" href="Img/logo.png" type="image/png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        header {
+            background: #f1a96b;
+            color: #fff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #f1a96b 3px solid;
+        }
+
+        header .logo {
+            width: 50px;
+            height: auto;
+            float: left;
+        }
+
+        header h1 {
+            float: left;
+            display: inline;
+            margin: 0;
+            padding-left: 10px;
+        }
+
+        header nav {
+            float: right;
+            margin-top: 10px;
+        }
+
+        header nav ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        header nav ul li {
+            display: inline;
+            margin-left: 5px;
+        }
+
+        header nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        header nav ul li a:hover {
+            color: #ffa2c5;
+        }
+
+        h2 {
+            color: #333;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .order-summary {
+            background: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            margin-top: 20px;
+        }
+
+        .place-order-btn {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            background: #ef90c4;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .place-order-btn:hover {
+            background: #ffa2da;
+        }
+
+        footer {
+            background: #f1a96b;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        footer .logo {
+            width: 30px;
+            height: auto;
+        }
+        .map-container {
+      text-align: center;
+      margin: 50px 0;
+    }
+    .map-container iframe {
+      width: 100%;
+      max-width: 600px;
+      height: 450px;
+      border: 0;
+    }
+    </style>
+</head>
+<body>
+<header>
+    <div class="container">
+        <img src="Img/a (1).png" alt="Sweet Life Logo" class="logo">
+        <h1>Sweet Life</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="order.html">Order now</a></li>
+                <li><a href="registration.html">Register</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div class="container">
+    <h2>Review Your Order</h2>
+    <div id="orderSummary" class="order-summary"></div>
+    <button class="place-order-btn" onclick="placeOrder()">Place Order</button>
+</div>
+
+<section class="map-container">
+    <h2>Location of our Store</h2>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3150.1058834331155!2d145.0399051157064!3d-37.818693479754314!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642f5c74c2083%3A0x6f3f4d92d67bdbee!2sJohn%20St%2C%20Hawthorn%20VIC%203122%2C%20Australia!5e0!3m2!1sen!2sus!4v1621606324571!5m2!1sen!2sus" allowfullscreen="" loading="lazy"></iframe>
+  </section>
+
+
+<footer>
+    <div class="container">
+        <div style="text-align: center;">
+            <img src="Img/a (1).png" alt="Sweet Life Logo" class="logo">
+        </div>
+        <p>&copy; 2024 Sweet Life. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const orderDetails = JSON.parse(localStorage.getItem("orderDetails"));
+    if (!orderDetails) {
+        alert("No order details found.");
+        window.location.href = "order.html";
+        return;
+    }
+
+    const orderSummary = document.getElementById("orderSummary");
+    orderSummary.innerHTML = `
+        <p><strong>First Name:</strong> ${orderDetails.firstName}</p>
+        <p><strong>Last Name:</strong> ${orderDetails.lastName}</p>
+        <p><strong>Delivery Address:</strong> ${orderDetails.deliveryAddress}</p>
+        <p><strong>Phone Number:</strong> ${orderDetails.phoneNumber}</p>
+        <p><strong>Payment Method:</strong> ${orderDetails.paymentMethod === "card" ? "Card" : "Cash"}</p>
+        ${orderDetails.paymentMethod === "card" ? `
+            <p><strong>Card Type:</strong> ${orderDetails.cardType}</p>
+            <p><strong>Card Name:</strong> ${orderDetails.cardName}</p>
+            <p><strong>Card Number:</strong> ${orderDetails.cardNumber}</p>
+            <p><strong>CVV:</strong> ${orderDetails.cvv}</p>
+        ` : ""}
+        <p><strong>Billing Address:</strong> ${orderDetails.billingAddress}</p>
+        <p><strong>Flavor:</strong> ${orderDetails.flavor}</p>
+        <p><strong>Size:</strong> ${orderDetails.size === "1" ? "1 Litre - $35" : "3 Litres - $55"}</p>
+        <p><strong>Delivery:</strong> ${orderDetails.delivery ? "Yes (+$10)" : "No"}</p>
+        <p><strong>Total Cost:</strong> ${orderDetails.total}</p>
+    `;
+});
+
+function placeOrder() {
+    localStorage.removeItem("orderDetails");
+    alert("Order placed successfully!");
+    window.location.href = "order.html";
+}
+</script>
+</body>
+</html>

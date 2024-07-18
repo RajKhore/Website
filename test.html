@@ -1,0 +1,277 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Sweet Life - Order</title>
+      <link rel="stylesheet" href="styles.css">
+      <link rel="icon" href="Img/logo.png" type="image/png">
+  </head>
+  <body>
+  <header>
+      <div class="container">
+          <img src="Img/a (1).png" alt="Sweet Life Logo" class="logo">
+          <h1>Sweet Life</h1>
+          <nav>
+              <ul>
+                  <li><a href="index.html">Home</a></li>
+                  <li><a href="about.html">About Us</a></li>
+                  <li><a href="order.html">Order now</a></li>
+                  <li><a href="registration.html">Register</a></li>
+              </ul>
+          </nav>
+      </div>
+  </header>
+
+  <div class="container">
+      <h2>Order Details</h2>
+      <form id="orderForm">
+          <label for="firstName">First Name:</label>
+          <input type="text" id="firstName" name="firstName" required><br><br>
+          
+          <label for="lastName">Last Name:</label>
+          <input type="text" id="lastName" name="lastName" required><br><br>
+          
+          <label for="deliveryAddress">Delivery Address:</label>
+          <input type="text" id="deliveryAddress" name="deliveryAddress" required>
+          <button type="button" onclick="showAddressInstructions()">info</button><br><br>
+
+          <label for="phoneNumber">Phone Number:</label>
+          <input type="tel" id="phoneNumber" name="phoneNumber" required><br><br>
+          
+          <label for="paymentMethod">Payment Method:</label>
+          <input type="radio" id="cash" name="paymentMethod" value="cash" checked>
+          <label for="cash">Cash</label>
+          <input type="radio" id="card" name="paymentMethod" value="card">
+          <label for="card">Card</label><br><br>
+          
+          <div id="cardDetails" style="display: none;">
+              <label for="cardType">Card Type:</label>
+              <select id="cardType" name="cardType">
+                  <option value="visa">Visa</option>
+                  <option value="mastercard">MasterCard</option>
+                  <option value="amex">American Express</option>
+              </select><br><br>
+              <label for="cardName">Card Name:</label>
+              <input type="text" id="cardName" name="cardName"><br><br>
+              <label for="cardNumber">Card Number:</label>
+              <input type="text" id="cardNumber" name="cardNumber" pattern="\d*" maxlength="16"><br><br>
+              <label for="cvv">CVV:</label>
+              <input type="text" id="cvv" name="cvv" pattern="\d*" maxlength="4"><br><br>
+          </div>
+
+          <label for="billingAddress">Billing Address:</label>
+          <input type="text" id="billingAddress" name="billingAddress" required><br><br>
+          <input type="checkbox" id="sameAsDelivery" name="sameAsDelivery">
+          <label for="sameAsDelivery">Same as delivery address</label><br><br>
+
+          <label for="flavor">Choose Flavor:</label>
+          <select id="flavor" name="flavor" required>
+              <option value="vanilla">Vanilla Bean</option>
+              <option value="strawberry">Savoury Strawberry</option>
+              <option value="chocolate">Chocy Chocolate</option>
+          </select><br><br>
+          
+          <label for="size">Choose Size:</label>
+          <select id="size" name="size" required>
+              <option value="1">1 Litre - $35</option>
+              <option value="3">3 Litres - $55</option>
+          </select><br><br>
+          
+          <input type="checkbox" id="delivery" name="delivery">
+          <label for="delivery">Delivery (+$10)</label><br><br>
+
+          <label for="pickup">Pickup:</label>
+<input type="checkbox" id="pickup" name="pickup">
+<label for="pickupLocation">Pickup Location:</label>
+<select id="pickupLocation" name="pickupLocation">
+    <option value="location1">St Kilda Store</option>
+    <option value="location2">Hawthorn Store</option>
+    <!-- Add more options if needed -->
+</select><br><br>
+
+          
+          <button type="button" onclick="calculateTotal()">Calculate Total</button><br><br>
+          
+          <label for="total">Total Cost:</label>
+          <input type="text" id="total" name="total" readonly><br><br>
+          
+          <input type="button" value="Review Order" onclick="reviewOrder()">
+          <p id="error-message" style="color:red; display:none;">Please fill out all required fields.</p>
+      </form>
+  </div>
+
+  <footer>
+      <div class="container">
+          <div style="text-align: center;">
+              <img src="Img/a (1).png" alt="Sweet Life Logo" class="logo">
+          </div>
+          <p>&copy; 2024 Sweet Life. All rights reserved.</p>
+      </div>
+  </footer>
+
+  <script>
+  function showAddressInstructions() {
+      alert("Address must include number of the house, suburb, state or territory, and postcode.");
+  }
+
+  function calculateTotal() {
+      const size = parseInt(document.getElementById("size").value);
+      let basePrice = size === 1 ? 35 : 55;
+      if (document.getElementById("delivery").checked) {
+          basePrice += 10;
+      }
+      document.getElementById("total").value = "$" + basePrice.toFixed(2);
+  }
+
+  document.getElementById("card").addEventListener("change", function() {
+      if (this.checked) {
+          document.getElementById("cardDetails").style.display = "block";
+          document.querySelectorAll("#cardDetails input").forEach(input => {
+              input.required = true;
+          });
+      }
+      validateForm();
+  });
+
+  document.getElementById("cash").addEventListener("change", function() {
+      if (this.checked) {
+          document.getElementById("cardDetails").style.display = "none";
+          document.querySelectorAll("#cardDetails input").forEach(input => {
+              input.required = false;
+          });
+      }
+      validateForm();
+  });
+
+  document.getElementById("cardType").addEventListener("change", function() {
+      const cardType = this.value;
+      const cardNumberInput = document.getElementById("cardNumber");
+      cardNumberInput.maxLength = cardType === "amex" ? 15 : 16;
+      validateForm();
+  });
+
+  document.getElementById("sameAsDelivery").addEventListener("change", function() {
+      const deliveryAddress = document.getElementById("deliveryAddress").value;
+      const billingAddress = document.getElementById("billingAddress");
+
+      if (this.checked) {
+          if (deliveryAddress === "") {
+              alert("Please enter your delivery address first");
+              this.checked = false;
+          } else {
+              billingAddress.value = deliveryAddress;
+          }
+      } else {
+          billingAddress.value = "";
+      }
+      validateForm();
+  });
+
+  document.querySelectorAll("#orderForm input, #orderForm select").forEach(function(element) {
+      element.addEventListener("input", validateForm);
+  });
+
+  function validateForm() {
+      const form = document.getElementById("orderForm");
+      const isCard = document.getElementById("card").checked;
+      let valid = form.checkValidity();
+
+      if (isCard) {
+          const cardDetails = document.getElementById("cardDetails").querySelectorAll("input");
+          valid = valid && Array.from(cardDetails).every(input => input.value.trim() !== "");
+      }
+
+      document.getElementById("error-message").style.display = valid ? "none" : "block";
+  }
+
+  function reviewOrder() {
+      validateForm();
+      if (document.getElementById("error-message").style.display === "block") {
+          return;
+      }
+
+      const orderDetails = {
+          firstName: document.getElementById("firstName").value,
+          lastName: document.getElementById("lastName").value,
+          deliveryAddress: document.getElementById("deliveryAddress").value,
+          phoneNumber: document.getElementById("phoneNumber").value,
+          paymentMethod: document.querySelector('input[name="paymentMethod"]:checked').value,
+          billingAddress: document.getElementById("billingAddress").value,
+          flavor: document.getElementById("flavor").value,
+          size: document.getElementById("size").value,
+          delivery: document.getElementById("delivery").checked,
+          total: document.getElementById("total").value
+      };
+
+      if (orderDetails.paymentMethod === "card") {
+          orderDetails.cardType = document.getElementById("cardType").value;
+          orderDetails.cardName = document.getElementById("cardName").value;
+          orderDetails.cardNumber = document.getElementById("cardNumber").value;
+          orderDetails.cvv = document.getElementById("cvv").value;
+      }
+
+      localStorage.setItem("orderDetails", JSON.stringify(orderDetails));
+      window.location.href = "review.html";
+  }
+  function calculateTotal() {
+    const size = parseInt(document.getElementById("size").value);
+    let basePrice = size === 1 ? 35 : 55;
+    if (document.getElementById("delivery").checked) {
+        basePrice += 10;
+    } else if (document.getElementById("pickup").checked) {
+        // Adjust price for pickup option
+        basePrice -= 5; // Example: reduce $5 for pickup
+    }
+    document.getElementById("total").value = "$" + basePrice.toFixed(2);
+}
+
+function reviewOrder() {
+    validateForm();
+    if (document.getElementById("error-message").style.display === "block") {
+        return;
+    }
+
+    const orderDetails = {
+        firstName: document.getElementById("firstName").value,
+        lastName: document.getElementById("lastName").value,
+        deliveryAddress: document.getElementById("deliveryAddress").value,
+        phoneNumber: document.getElementById("phoneNumber").value,
+        paymentMethod: document.querySelector('input[name="paymentMethod"]:checked').value,
+        billingAddress: document.getElementById("billingAddress").value,
+        flavor: document.getElementById("flavor").value,
+        size: document.getElementById("size").value,
+        delivery: document.getElementById("delivery").checked,
+        pickup: document.getElementById("pickup").checked,
+        pickupLocation: document.getElementById("pickupLocation").value, // Include pickup location
+        total: document.getElementById("total").value
+    };
+
+    if (orderDetails.paymentMethod === "card") {
+        orderDetails.cardType = document.getElementById("cardType").value;
+        orderDetails.cardName = document.getElementById("cardName").value;
+        orderDetails.cardNumber = document.getElementById("cardNumber").value;
+        orderDetails.cvv = document.getElementById("cvv").value;
+    }
+
+    localStorage.setItem("orderDetails", JSON.stringify(orderDetails));
+    window.location.href = "review.html";
+}
+
+document.getElementById("delivery").addEventListener("change", function() {
+    if (this.checked) {
+        document.getElementById("pickup").checked = false; // Uncheck pickup if delivery is checked
+    }
+    calculateTotal();
+});
+
+document.getElementById("pickup").addEventListener("change", function() {
+    if (this.checked) {
+        document.getElementById("delivery").checked = false; // Uncheck delivery if pickup is checked
+    }
+    calculateTotal();
+});
+
+  </script>
+  </body>
+  </html>

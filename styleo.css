@@ -1,0 +1,40 @@
+/* Product section styles */
+.container {
+    width: 80%;
+    margin: 0 auto;
+    max-width: 1200px;
+  }
+  
+  .item {
+    display: flex;
+    margin-bottom: 40px;
+  }
+  
+  .image {
+    flex: 1;
+    margin-right: 20px;
+  }
+  
+  .image img {
+    max-width: 100%;
+  }
+  
+  .description {
+    flex: 2;
+  }
+  
+  .order-button {
+    display: inline-block;
+    background-color: #f291cb;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  
+  .order-button:hover {
+    background-color: #ffc803;
+  }
+  

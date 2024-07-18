@@ -1,0 +1,63 @@
+/* Add your CSS styles here */
+
+  
+  h1 {
+    text-align: center;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #0024f3;
+    border-radius: 5px;
+  }
+  
+  button {
+    width: 100%;
+    padding: 10px;
+    background-color: #f1a96b;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #f3abab;
+  }
+  
+  #message {
+    margin-top: 10px;
+    text-align: center;
+    color: #007bff;
+  }
+  
+  /* Reset default margin and padding */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+/* Define styles for the content */
+.content {
+    /* Give some padding to separate content from footer */
+    padding-bottom: 60px; /* Adjust according to your footer's height */
+}
+
+/* Define styles for the footer */
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}

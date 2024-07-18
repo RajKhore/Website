@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us</title>
+  <link rel="stylesheet" href="styles.css">
+  <head>
+    <link rel="icon" href="Img/logo.png"image/png">
+</head>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .logo {
+      max-width: 100px;
+    }
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    nav ul li {
+      display: inline;
+      margin-right: 20px;
+    }
+    
+    section {
+      padding: 40px 0;
+      text-align: center;
+    }
+    section h2 {
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    section p {
+      font-size: 16px;
+      color: #666;
+      line-height: 1.6;
+    }
+    .active a {
+      color: #ffcc49; 
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <img src="Img/a (1).png" alt="Sweet Life Logo" class="logo">
+      <h1>Sweet Life</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="order.html">Order now</a></li>
+          <li><a href="registration.html">Register</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <section>
+    <div class="container">
+      <h2>Welcome to Sweet Life</h2>
+      <p>Where every scoop is a celebration of joy and flavor! Founded in 2024, Sweet Life is more than just an ice cream shop – it's a destination for those who appreciate the simple pleasures in life and the sweetness of every moment.</p>
+      <p>At Sweet Life, we believe that indulgence should be a guilt-free experience. That's why we handcraft our artisanal ice creams using only the finest ingredients, sourced locally whenever possible. From creamy classics like vanilla bean to adventurous creations like salted caramel pretzel, each flavor is crafted with care to tantalize your taste buds and transport you to a world of pure delight.</p>
+      <p>But Sweet Life is more than just ice cream – it's a place where memories are made and friendships are forged. Whether you're treating yourself to a cone on a sunny afternoon or gathering with loved ones for a special occasion, our cozy shop provides the perfect backdrop for moments of laughter, connection, and, of course, delicious desserts.</p>
+      <p>At Sweet Life, we're committed to spreading joy, one scoop at a time. Come join us on a journey of sweetness and savor the simple pleasures of life at Sweet Life – where every day is a celebration of the sweet life!</p>
+    </div>
+  </section>
+ 
+  <footer>
+    <div class="container">
+      <div style="text-align: center;">
+        <img src="Img/a (1).png" alt="Sweet Life Logo" class="logo">
+    </div>
+    
+      <p>&copy; 2024 Sweet Life. All rights reserved.</p>
+    </div>
+  </footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const currentLocation = window.location.href;
+      const menuItems = document.querySelectorAll('nav ul li a');
+
+      menuItems.forEach(item => {
+        if (item.href === currentLocation) {
+          item.parentElement.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+
+</html>
